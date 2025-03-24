@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABG Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .slider-container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .slider {
+            width: 100%;
+        }
+        .equation {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        svg {
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ABG Calculator</h1>
+
+    <!-- Equation Display -->
+    <div class="equation">
+        pH = pK + log<sub>10</sub>(HCO3 / (PCO2_conversion × PaCO2))
+    </div>
+
+    <!-- Sliders -->
+    <div class="slider-container">
+        <label for="PaCO2">PaCO2 (0 to 120):</label>
+        <input type="range" id="PaCO2" name="PaCO2" min="0" max="120" value="40" class="slider">
+        <span id="PaCO2-value">40</span>
+    </div>
+
+    <div class="slider-container">
+        <label for="HCO3">HCO3 (5 to 50):</label>
+        <input type="range" id="HCO3" name="HCO3" min="5" max="50" value="24" class="slider">
+        <span id="HCO3-value">24</span>
+    </div>
+
+    <!-- Static Graph -->
+    <svg width="400" height="300" viewBox="0 0 400 300">
+        <!-- X-Axis (PaCO2) -->
+        <line x1="50" y1="250" x2="350" y2="250" stroke="black" stroke-width="2" />
+        <text x="355" y="255" font-size="12">PaCO2</text>
+
+        <!-- Y-Axis (HCO3) -->
+        <line x1="50" y1="250" x2="50" y2="50" stroke="black" stroke-width="2" />
+        <text x="45" y="45" font-size="12">HCO3</text>
+
+        <!-- Precomputed Curve -->
+        <path d="M50,250 L100,200 L150,150 L200,100 L250,50" stroke="blue" stroke-width="2" fill="none" />
+
+        <!-- Points -->
+        <circle cx="50" cy="250" r="5" fill="red" />
+        <circle cx="100" cy="200" r="5" fill="red" />
+        <circle cx="150" cy="150" r="5" fill="red" />
+        <circle cx="200" cy="100" r="5" fill="red" />
+        <circle cx="250" cy="50" r="5" fill="red" />
+    </svg>
+
+    <!-- pH Display -->
+    <div class="equation">
+        Calculated pH: <span id="pH-value">7.40</span>
+    </div>
+</body>
+</html>
